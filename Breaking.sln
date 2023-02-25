@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breaking", "Breaking\Breaking.csproj", "{866E2C4E-069B-4235-874A-4E17DC064AEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{866E2C4E-069B-4235-874A-4E17DC064AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{866E2C4E-069B-4235-874A-4E17DC064AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{866E2C4E-069B-4235-874A-4E17DC064AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{866E2C4E-069B-4235-874A-4E17DC064AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {422BD203-00D3-48B8-A1CA-B0D2F3AFF48A}
+	EndGlobalSection
+EndGlobal
