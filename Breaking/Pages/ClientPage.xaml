@@ -93,7 +93,7 @@
                   TextBoxBase.TextChanged="cbService_TextChanged"
                   SelectionChanged="cbService_SelectionChanged"
                   Height="40" Margin="5"/>
-        <Image x:Name="imgClient" Source="{Binding Client.Photo}"
+        <Image x:Name="imgClient" Source="{Binding Client.PhotoPath}"
                Grid.Row="0" Grid.RowSpan="3"/>
         <Button x:Name="btnChangePhoto" Content="Изменить фото"
                 Grid.Row="3"

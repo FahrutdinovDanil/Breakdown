@@ -157,5 +157,10 @@ namespace Breaking.Pages
         {
             NavigationService.Navigate(new ClientPage(new Client { RegistrationDate = DateTime.Now }));
         }
+
+        private void btnServices_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ServicesListPage());
+        }
     }
 }

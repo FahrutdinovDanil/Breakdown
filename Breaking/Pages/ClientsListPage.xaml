@@ -45,31 +45,32 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <Image Source="{Binding Photo}" Grid.RowSpan="3"/>
-                        <TextBlock Grid.Column="1">
+                        <Image Source="{Binding PhotoPath}" Grid.RowSpan="3" Margin="10"/>
+                        <TextBlock Grid.Column="1" Margin="5">
                             <Run Text="{Binding LastName}"/>
                             <Run Text="{Binding FirstName}"/>
                             <Run Text="{Binding Patronymic}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="1">
+                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="5">
                             <Run Text="Дата регистрации:"/>
                             <Run Text="{Binding RegistrationDate, StringFormat=dd.MM.yyyy}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="2">
+                        <TextBlock Grid.Column="1" Grid.Row="2" Margin="5">
                             <Run Text="Пол:"/>
                             <Run Text="{Binding Gender.Name}"/>
                         </TextBlock>
                         <TextBlock Grid.Column="1"
-                                   Grid.Row="3">
+                                   Grid.Row="3"
+                                   Margin="5">
                             <Run Text="Номер телефона:"/>
                             <Run Text="{Binding Phone}"/>
                         </TextBlock>
@@ -81,6 +82,11 @@
         <Button x:Name="btnAddClient" Content="Добавить клиента"
                 Grid.Row="2"
                 Click="btnAddClient_Click"
+                Margin="10"/>
+        <Button x:Name="btnServices" Content="Список услуг"
+                Grid.Row="2"
+                Grid.Column="1"
+                Click="btnServices_Click"
                 Margin="10"/>
         <StackPanel Orientation="Horizontal"
                     Grid.ColumnSpan="3"

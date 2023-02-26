@@ -101,7 +101,7 @@
           <Property Name="DurationInSeconds" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Discount" Type="float" />
-          <Property Name="MainImagePath" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MainImagePath" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ServicePhoto">
           <Key>
@@ -529,7 +529,7 @@
           <Property Name="DurationInSeconds" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Double" />
-          <Property Name="MainImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MainImagePath" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="ClientServices" Relationship="BreakingModel.FK_ClientService_Service" FromRole="Service" ToRole="ClientService" />
           <NavigationProperty Name="ServicePhotoes" Relationship="BreakingModel.FK_ServicePhoto_Service" FromRole="Service" ToRole="ServicePhoto" />
         </EntityType>
@@ -677,7 +677,7 @@
           <End Type="BreakingModel.Client" Role="Client" Multiplicity="*" />
           <End Type="BreakingModel.Tag" Role="Tag" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

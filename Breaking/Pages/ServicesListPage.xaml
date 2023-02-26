@@ -1,0 +1,124 @@
+﻿<Page x:Class="Breaking.Pages.ServicesListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Breaking.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ServicesListPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="tbSearch"
+                 TextChanged="tbSearch_TextChanged"
+                 Margin="10"/>
+
+        <ComboBox x:Name="cbSort" Grid.Column="2"
+                  SelectedIndex="0"
+                  SelectionChanged="cbSort_SelectionChanged"
+                  ItemsSource="{Binding Sortings.Keys}"
+                  Margin="10"/>
+
+        <ListView x:Name="lvServices" ItemsSource="{Binding Services}"
+                  Grid.Row="1" Grid.ColumnSpan="3"
+                  HorizontalAlignment="Stretch"
+                  SelectionChanged="lvServices_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Фото" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Width="150" Height="70" Margin="10 5 10 5">
+                                    <Image.Source>
+                                        <Binding Path="MainImagePath">
+                                            <Binding.TargetNullValue>
+                                                <ImageSource>/Resourses/default_image.png</ImageSource>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Название" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Grid.Column="2" FontSize="18">
+                                    <Run Text="{Binding Title}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Длительность" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Grid.Column="2" FontSize="18">
+                                    <Run Text="{Binding DurationInSeconds}"/>
+                                    <Run Text="секунд"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Стоимость" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Grid.Column="2" FontSize="18">
+                                    <Run Text="{Binding Cost}"/>
+                                    <Run Text="руб."/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Описание" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Grid.Column="2" FontSize="18">
+                                    <Run Text="{Binding Discription}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Скидка" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Discount, StringFormat='{}{0}%'}" 
+                                           Grid.Column="2"
+                                           FontSize="18">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnClients" Content="Список клиентов"
+                Grid.Row="2"
+                Grid.Column="1"
+                Click="btnClients_Click"
+                Margin="10"/>
+        <Button x:Name="btnAddServices" Content="Добавить услугу"
+                Grid.Row="2"
+                Click="btnAddServices_Click"
+                Margin="10"/>
+        <StackPanel Orientation="Horizontal"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="2" HorizontalAlignment="Right">
+            <Button x:Name="PreviousPageButton" Content="&lt;" Click="PreviousPageButton_Click"/>
+            <StackPanel Orientation="Horizontal" x:Name="PageNumbersPanel">
+
+            </StackPanel>
+            <Button x:Name="NextPageButton" Content="&gt;" Click="NextPageButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

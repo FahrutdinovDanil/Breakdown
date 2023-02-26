@@ -5,17 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Breaking"
         mc:Ignorable="d"
-        Title="EditServiceWindow" Height="450" Width="800">
+        Title="EditServiceWindow" Height="250" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Дата"/>
-        <DatePicker Grid.Row="1" SelectedDate="{Binding StartTime}"/>
-        <Button x:Name="btnSave" Grid.Row="2" Content="Сохранить" Click="btnSave_Click"/>
-        <Button x:Name="btnDelete" Grid.Row="3" Content="Удалить" Click="btnDelete_Click"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Дата"
+                       VerticalAlignment="Center"
+                       FontSize="24"
+                       Width="250"
+                       Margin="10"/>
+            <DatePicker Grid.Row="1" SelectedDate="{Binding StartTime}"
+                        Height="40"
+                        Width="250"
+                        Margin="10"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnSave"
+                    Height="50"
+                    Width="250" Content="Сохранить"
+                    Margin="10" Click="btnSave_Click"/>
+            <Button x:Name="btnDelete"
+                    Width="250"
+                    Height="50"
+                    Margin="10" Content="Удалить" 
+                    Click="btnDelete_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

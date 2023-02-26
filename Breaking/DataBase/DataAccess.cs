@@ -39,5 +39,18 @@ namespace Breaking.DataBase
             BreakingEntities.GetContext().SaveChanges();
             RefreshList.Invoke();
         }
+        public static void SaveService(Service service)
+        {
+            if (service.ID == 0)
+                BreakingEntities.GetContext().Services.Add(service);
+            BreakingEntities.GetContext().SaveChanges();
+            RefreshList?.Invoke();
+        }
+        public static void DeleteService(Service service)
+        {
+            BreakingEntities.GetContext().Services.Remove(service);
+            BreakingEntities.GetContext().SaveChanges();
+            RefreshList.Invoke();
+        }
     }
 }
