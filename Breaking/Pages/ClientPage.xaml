@@ -11,8 +11,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -24,40 +25,59 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Фамилия" Grid.Column="1"/>
+        <TextBlock Text="Фамилия" Grid.Column="1"
+                   VerticalAlignment="Center" Margin="10"/>
         <TextBox Text="{Binding Client.LastName}"
-                   Grid.Column="2"/>
-        <TextBlock Text="Имя" Grid.Row="1" Grid.Column="1"/>
+                   Grid.Column="2" Height="40" Margin="5"/>
+        <TextBlock Text="Имя" Grid.Row="1" Grid.Column="1"
+                   VerticalAlignment="Center" Margin="10"/>
         <TextBox Text="{Binding Client.FirstName}"
                  Grid.Column="2"
-                 Grid.Row="1"/>
-        <TextBlock Text="Отчество" Grid.Row="2" Grid.Column="1"/>
+                 Grid.Row="1"
+                 Height="40" Margin="5"/>
+        <TextBlock Text="Отчество" Grid.Row="2" Grid.Column="1"
+                   VerticalAlignment="Center" Margin="10"/>
         <TextBox Text="{Binding Client.Patronymic}"
-                 Grid.Column="2" Grid.Row="2"/>
-        <TextBlock Text="Пол" Grid.Row="3" Grid.Column="1"/>
+                 Grid.Column="2" Grid.Row="2"
+                 Height="40" Margin="5"/>
+        <TextBlock Text="Пол" Grid.Row="3" Grid.Column="1"
+                   VerticalAlignment="Center" Margin="10"/>
         <ComboBox ItemsSource="{Binding Genders}"
                   SelectedItem="{Binding Client.Gender}"
                   Grid.Row="3" Grid.Column="2"
-                  DisplayMemberPath="Name"/>
-        <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="1"/>
-        <TextBlock Text="Дата рождения" Grid.Row="5" Grid.Column="1"/>
+                  DisplayMemberPath="Name"
+                  Height="40" Margin="5"
+                  VerticalContentAlignment="Center"/>
+        <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="1"
+                   VerticalAlignment="Center" Margin="10"/>
+        <TextBox Text="{Binding Client.Phone}" Grid.Row="4" Grid.Column="2"
+                 Height="40" Margin="5"/>
+
+        <TextBlock Text="Дата рождения" Grid.Row="5" Grid.Column="1"
+                   VerticalAlignment="Center" Margin="10"/>
         <DatePicker SelectedDate="{Binding Client.Birthday}"
                     Grid.Column="2"
-                    Grid.Row="5"/>
-        <TextBlock Text="Email" Grid.Column="3" Grid.Row="0"/>
+                    Grid.Row="5"
+                    Height="40" Margin="5"/>
+        <TextBlock Text="Email" Grid.Column="3" Grid.Row="0"
+                   VerticalAlignment="Center" Margin="10"/>
         <TextBox Text="{Binding Client.Email}"
-                 Grid.Row="1"
-                 Grid.Column="3"/>
+                 Grid.Row="0"
+                 Grid.Column="4"
+                 Height="40" Margin="5"/>
 
-        <TextBlock Text="Дата регистрации" Grid.Column="3" Grid.Row="2"/>
+        <TextBlock Text="Дата регистрации" Grid.Column="3" Grid.Row="1"
+                   VerticalAlignment="Center" Margin="10"/>
         <DatePicker IsEnabled="False" SelectedDate="{Binding Client.RegistrationDate}"
-                    Grid.Column="3" Grid.Row="3"/>
+                    Grid.Column="4" Grid.Row="1"
+                    Height="40" Margin="5"/>
 
         <ListView x:Name="lvServices" ItemsSource="{Binding Client.ClientServices}"
                   SelectionChanged="lvServices_SelectionChanged"
-                  Grid.Column="2"
+                  Grid.Column="4"
                   Grid.Row="2"
-                  Grid.RowSpan="3">
+                  Grid.RowSpan="3"
+                  Margin="5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -67,20 +87,28 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ComboBox Name="cbService" Grid.Column="0" Grid.Row="4"
+        <ComboBox Name="cbService" Grid.Column="4" Grid.Row="5"
                   ItemsSource="{Binding Services}"
                   IsEditable="True"
                   TextBoxBase.TextChanged="cbService_TextChanged"
-                  SelectionChanged="cbService_SelectionChanged"/>
+                  SelectionChanged="cbService_SelectionChanged"
+                  Height="40" Margin="5"/>
         <Image x:Name="imgClient" Source="{Binding Client.Photo}"
                Grid.Row="0" Grid.RowSpan="3"/>
         <Button x:Name="btnChangePhoto" Content="Изменить фото"
                 Grid.Row="3"
+                Height="40" Margin="5"
                 Click="btnChangePhoto_Click"/>
         <Button x:Name="btnDelete" Content="Удалить" Grid.Row="6"
-                Click="btnDelete_Click"/>
-        <Button x:Name="btnSave" Content="Сохранить" Grid.Row="6" Grid.Column="3"
-                Click="btnSave_Click"/>
+                Grid.Column="3"
+                Click="btnDelete_Click"
+                Height="40" Margin="5"/>
+        <Button x:Name="btnSave" Content="Сохранить" Grid.Row="6" Grid.Column="4"
+                Click="btnSave_Click"
+                Height="40" Margin="5"/>
+        <Button x:Name="btnBack" Content="Назад" Grid.Row="6" Grid.Column="0"
+                Click="btnBack_Click"
+                Height="40" Margin="5"/>
 
     </Grid>
 </Page>

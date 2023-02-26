@@ -26,13 +26,14 @@
 
         <ComboBox x:Name="cbSort" Grid.Column="1"
                   SelectedIndex="0"
-                  SelectionChanged="cbSort_SelectionChanged"
-                  ItemsSource="{Binding Sorting.Keys}"
+                  SelectionChanged="FiltersChanged"
+                  ItemsSource="{Binding Sortings.Keys}"
                   Margin="10"/>
 
         <ComboBox x:Name="cbGender" Grid.Column="2"
                   ItemsSource="{Binding Genders}"
-                  SelectionChanged="cbGender_SelectionChanged"
+                  SelectedIndex="0"
+                  SelectionChanged="FiltersChanged"
                   DisplayMemberPath="Name"
                   Margin="10"/>
 
@@ -46,9 +47,9 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -60,18 +61,18 @@
                             <Run Text="{Binding Patronymic}"/>
                         </TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="1">
-                            <Run Text="Пол:"/>
+                            <Run Text="Дата регистрации:"/>
                             <Run Text="{Binding RegistrationDate, StringFormat=dd.MM.yyyy}"/>
                         </TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="2">
                             <Run Text="Пол:"/>
                             <Run Text="{Binding Gender.Name}"/>
                         </TextBlock>
-                        <TextBlock Text="{Binding Phone}"
-                                   Grid.Column="2"
-                                   Grid.Row="1"
-                                   HorizontalAlignment="Right"
-                                   FontSize="20"/>
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="3">
+                            <Run Text="Номер телефона:"/>
+                            <Run Text="{Binding Phone}"/>
+                        </TextBlock>
 
                     </Grid>
                 </DataTemplate>
@@ -81,8 +82,14 @@
                 Grid.Row="2"
                 Click="btnAddClient_Click"
                 Margin="10"/>
-        <StackPanel x:Name="spPageNumbers" Orientation="Horizontal"
-                    Grid.Row="2"
-                    Grid.Column="2"/>
+        <StackPanel Orientation="Horizontal"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="2" HorizontalAlignment="Right">
+            <Button x:Name="PreviousPageButton" Content="&lt;" Click="PreviousPageButton_Click"/>
+            <StackPanel Orientation="Horizontal" x:Name="PageNumbersPanel">
+
+            </StackPanel>
+            <Button x:Name="NextPageButton" Content="&gt;" Click="NextPageButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

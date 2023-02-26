@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:Breaking"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Tw Cen MT"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Tw Cen MT"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#FFFFFFE1"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FFFF9C1A"/>
+            <Setter Property="FontFamily" Value="Tw Cen MT"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="#FFFFFFE1"/>
+        </Style>
     </Application.Resources>
 </Application>
+    

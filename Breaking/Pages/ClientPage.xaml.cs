@@ -35,6 +35,7 @@ namespace Breaking.Pages
             Services = DataAccess.GetServices();
             if (client.ID == 0)
                 btnDelete.Visibility = Visibility.Collapsed;
+
             DataContext = this;
         }
 
@@ -103,6 +104,11 @@ namespace Breaking.Pages
                 return;
             }
             DataAccess.SaveClient(Client);
+            NavigationService.GoBack();
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
             NavigationService.GoBack();
         }
     }

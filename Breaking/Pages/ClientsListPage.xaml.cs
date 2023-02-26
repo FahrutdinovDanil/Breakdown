@@ -22,7 +22,7 @@ namespace Breaking.Pages
     /// </summary>
     public partial class ClientsListPage : Page
     {
-        public List<Client> Clients { get; set; }
+        public IEnumerable<Client> Clients { get; set; }
         public IEnumerable<Client> ClientsForFilters { get; set; }
         public List<Gender> Genders { get; set; }
         public int PageNumber { get; set; } = 1;
@@ -31,22 +31,26 @@ namespace Breaking.Pages
         {
             InitializeComponent();
             Clients = DataAccess.GetClients();
-            Genders = DataAccess.GetGenders();
-            Genders.Insert(0, new Gender { Clients = Clients, Name = "Все" });
+            ClientsForFilters = Clients;
+
             Sortings = new Dictionary<string, Func<Client, object>>
             {
                 {"Фамилия по убыванию", x => x.LastName },
-                {"Фамилия по возрастанию", y => y.LastName},
-                {"Дата регистрации по убыванию", x => x.RegistrationDate},
-                {"Дата регистрации по возрастанию", x => x.RegistrationDate}
+                {"Фамилия по возрастанию", x => x.LastName },
+                {"Дата регистрации по убыванию", x => x.RegistrationDate },
+                {"Дата регистрации по возрастанию", x => x.RegistrationDate },
             };
+
             DataAccess.RefreshList += DataAccess_RefreshList;
+            Genders = DataAccess.GetGenders();
+            Genders.Insert(0, new Gender { Name = "Все" });
+
             DataContext = this;
         }
 
         private void SetPageNumbers()
         {
-            spPageNumbers.Children.Clear();
+            PageNumbersPanel.Children.Clear();
             int pagesCount = ClientsForFilters.Count() % 10 == 0 ? ClientsForFilters.Count() / 10 : ClientsForFilters.Count() / 10 + 1;
             for (int i = 0; i < pagesCount; i++)
             {
@@ -66,40 +70,38 @@ namespace Breaking.Pages
 
                 textBlock.Inlines.Add(hyperlink);
 
-                spPageNumbers.Children.Add(textBlock);
+                PageNumbersPanel.Children.Add(textBlock);
             }
-
         }
 
         private void Filter(bool filtersChanged)
         {
+
+            var gender = cbGender.SelectedItem as Gender;
+            var sorting = Sortings[cbSort.SelectedItem as string];
+            var text = tbSearch.Text.ToLower();
             if (filtersChanged)
-                PageNumber = 0;
-            int pagesCount = ClientsForFilters.Count() % 10 == 0 ? ClientsForFilters.Count() / 10 : ClientsForFilters.Count() / 10 + 1;
-            var gender = (cbGender.SelectedItem as Gender);
-            var searchText = tbSearch.Text.ToLower();
-            var sort = cbSort.SelectedItem as string;
-            if (gender != null && sort != null)
+                PageNumber = 1;
+
+            if (gender != null && sorting != null)
             {
-                ClientsForFilters = gender.Clients.Where(x => x.ToString().ToLower().Contains(searchText))
-                                            .OrderBy(Sortings[sort]).ToList();
-                if (sort.Contains("убыванию"))
-                    ClientsForFilters.Reverse();
+                if (gender.Name != "Все")
+                    ClientsForFilters = Clients.Where(x => x.Gender == gender).ToList();
+                else
+                    ClientsForFilters = Clients;
 
-                lvClients.ItemsSource = ClientsForFilters.Skip(PageNumber * pagesCount).Take(pagesCount);
-                lvClients.Items.Refresh();
-                SetPageNumbers();
+                ClientsForFilters = ClientsForFilters.OrderBy(sorting).ToList();
+                if ((cbSort.SelectedItem as string).Contains("убыванию"))
+                    ClientsForFilters = ClientsForFilters.Reverse();
+
+                ClientsForFilters = ClientsForFilters.Where(x => x.LastName.ToLower().Contains(text)
+                                                    || x.Email.Contains(text)
+                                                    || x.Phone.Contains(text)).ToList();
+
+                lvClients.ItemsSource = new ObservableCollection<Client>(ClientsForFilters.Skip((PageNumber - 1) * 10).Take(10).ToList());
             }
-
-        }
-        private void DataAccess_RefreshList()
-        {
-            Clients = DataAccess.GetClients();
-            lvClients.ItemsSource = Clients;
-            lvClients.Items.Refresh();
             SetPageNumbers();
         }
-
         private void NavigateToPage(object sender, RoutedEventArgs e)
         {
             PageNumber = int.Parse(((sender as Hyperlink).Inlines.FirstOrDefault() as Run).Text);
@@ -107,17 +109,39 @@ namespace Breaking.Pages
             Filter(false);
         }
 
+
+        private void DataAccess_RefreshList()
+        {
+            Clients = DataAccess.GetClients();
+            lvClients.ItemsSource = Clients;
+            lvClients.Items.Refresh();
+            SetPageNumbers();
+        }
+        private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PageNumber > 1)
+            {
+                PageNumber--;
+                Filter(false);
+            }
+        }
+
+        private void NextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            int pagesCount = ClientsForFilters.Count() % 10 == 0 ? ClientsForFilters.Count() / 10 : ClientsForFilters.Count() / 10 + 1;
+            if (PageNumber < pagesCount)
+            {
+                PageNumber++;
+                Filter(false);
+            }
+        }
+
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             Filter(true);
         }
 
-        private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Filter(true);
-        }
-
-        private void cbGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FiltersChanged(object sender, SelectionChangedEventArgs e)
         {
             Filter(true);
         }
